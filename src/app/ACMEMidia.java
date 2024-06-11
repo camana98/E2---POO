@@ -158,6 +158,14 @@ public class ACMEMidia {
 				}
 			}
 
+			// Mostrar o somatório de locações de todas as mídias - PASSO 8
+			double somatorio = midiateca.calculaSomatorioLocacoes();
+			if (somatorio == 0) {
+				linhasSaida.add("8:Nenhuma midia encontrada");
+			} else {
+				linhasSaida.add(String.format(Locale.US, "8:%.2f", somatorio));
+			}
+
 
 
 			// Aqui continuaremos com as operações restantes

@@ -74,6 +74,14 @@ public class Midiateca implements Iterador {
 		return false;
 	}
 
+	public double calculaSomatorioLocacoes() {
+		double somatorio = 0;
+		for (Midia midia : midias) {
+			somatorio += midia.calculaLocacao();
+		}
+		return somatorio;
+	}
+
 	@Override
 	public void reset() {
 		contador = 0;

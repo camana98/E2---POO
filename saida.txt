@@ -3,3 +3,4 @@
 3:222,Musica 1,2023,Romance,148.50,44.55
 4:222,Musica 1,2023,Romance,148.50,44.55
 5:111,Filme 1,2024,Ficcao,1080,20.00
+6:Musica 1,148.50

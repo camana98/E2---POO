@@ -52,6 +52,19 @@ public class Midiateca implements Iterador {
 		return resultado;
 	}
 
+	public Musica consultaMaiorDuracaoMusica() {
+		Musica musicaMaiorDuracao = null;
+		for (Midia midia : midias) {
+			if (midia instanceof Musica) {
+				Musica musica = (Musica) midia;
+				if (musicaMaiorDuracao == null || musica.getDuracao() > musicaMaiorDuracao.getDuracao()) {
+					musicaMaiorDuracao = musica;
+				}
+			}
+		}
+		return musicaMaiorDuracao;
+	}
+
 	public boolean removeMidia(int codigo) {
 		Midia midia = midiasPorCodigo.remove(codigo);
 		if (midia != null) {

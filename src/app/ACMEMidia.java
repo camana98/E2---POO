@@ -127,6 +127,16 @@ public class ACMEMidia {
 				}
 			}
 
+			// Mostrar os dados da música de maior duração - PASSO 6
+			Musica musicaMaiorDuracao = midiateca.consultaMaiorDuracaoMusica();
+			if (musicaMaiorDuracao == null) {
+				linhasSaida.add("6:Nenhuma música encontrada");
+			} else {
+				linhasSaida.add(String.format(Locale.US, "6:%s,%.2f", musicaMaiorDuracao.getTitulo(), musicaMaiorDuracao.getDuracao()));
+			}
+
+
+
 			// Aqui continuaremos com as operações restantes
 
 		} catch (IOException e) {

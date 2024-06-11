@@ -4,6 +4,7 @@ import dados.Midiateca;
 import dados.Video;
 import dados.Musica;
 import dados.Categoria;
+import dados.Midia;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -30,7 +31,7 @@ public class ACMEMidia {
 		try (BufferedReader br = new BufferedReader(new FileReader(ARQUIVO_ENTRADA))) {
 			String linha;
 
-			// Lendo vídeos
+			// Cadastrar vídeos - PASSO 1
 			while ((linha = br.readLine()) != null && !linha.equals("-1")) {
 				int codigo = Integer.parseInt(linha);
 				String titulo = br.readLine();
@@ -47,7 +48,7 @@ public class ACMEMidia {
 				}
 			}
 
-			// Lendo músicas
+			// Cadastrar músicas - PASSO 2
 			while ((linha = br.readLine()) != null && !linha.equals("-1")) {
 				int codigo = Integer.parseInt(linha);
 				String titulo = br.readLine();
@@ -61,6 +62,27 @@ public class ACMEMidia {
 					linhasSaida.add(String.format(Locale.US, "2:%d,%s,%d,%s,%.2f", codigo, titulo, ano, categoria.getNome(), duracao));
 				} else {
 					linhasSaida.add(String.format("2:Erro-musica com codigo repetido: %d", codigo));
+				}
+			}
+
+			// Mostrar os dados de uma determinada mídia - PASSO 3
+			if ((linha = br.readLine()) != null) {
+				int codigo = Integer.parseInt(linha);
+				Midia midia = midiateca.consultaPorCodigo(codigo);
+				if (midia == null) {
+					linhasSaida.add("3:Codigo inexistente");
+				} else {
+					if (midia instanceof Video) {
+						Video video = (Video) midia;
+						linhasSaida.add(String.format(Locale.US, "3:%d,%s,%d,%s,%d,%.2f",
+								video.getCodigo(), video.getTitulo(), video.getAno(),
+								video.getCategoria().getNome(), video.getQualidade(), video.calculaLocacao()));
+					} else if (midia instanceof Musica) {
+						Musica musica = (Musica) midia;
+						linhasSaida.add(String.format(Locale.US, "3:%d,%s,%d,%s,%.2f,%.2f",
+								musica.getCodigo(), musica.getTitulo(), musica.getAno(),
+								musica.getCategoria().getNome(), musica.getDuracao(), musica.calculaLocacao()));
+					}
 				}
 			}
 

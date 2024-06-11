@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Midiateca implements Iterador {
-
 	private int contador;
 	private List<Midia> midias;
 	private Map<Integer, Midia> midiasPorCodigo;

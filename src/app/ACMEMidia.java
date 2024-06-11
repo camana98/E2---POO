@@ -109,6 +109,24 @@ public class ACMEMidia {
 				}
 			}
 
+			// Mostrar os dados de vídeo(s) de uma determinada qualidade - PASSO 5
+			if ((linha = br.readLine()) != null) {
+				int qualidade = Integer.parseInt(linha);
+				List<Midia> midias = midiateca.consultaPorQualidade(qualidade);
+				if (midias.isEmpty()) {
+					linhasSaida.add("5:Qualidade inexistente");
+				} else {
+					for (Midia m : midias) {
+						if (m instanceof Video) {
+							Video video = (Video) m;
+							linhasSaida.add(String.format(Locale.US, "5:%d,%s,%d,%s,%d,%.2f",
+									video.getCodigo(), video.getTitulo(), video.getAno(),
+									video.getCategoria().getNome(), video.getQualidade(), video.calculaLocacao()));
+						}
+					}
+				}
+			}
+
 			// Aqui continuaremos com as operações restantes
 
 		} catch (IOException e) {

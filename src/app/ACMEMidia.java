@@ -86,6 +86,29 @@ public class ACMEMidia {
 				}
 			}
 
+			// Mostrar os dados de mídia(s) de uma determinada categoria - PASSO 4
+			if ((linha = br.readLine()) != null) {
+				Categoria categoria = Categoria.valueOf(linha.toUpperCase());
+				List<Midia> midias = midiateca.consultaPorCategoria(categoria);
+				if (midias.isEmpty()) {
+					linhasSaida.add("4:Nenhuma midia encontrada");
+				} else {
+					for (Midia m : midias) {
+						if (m instanceof Video) {
+							Video video = (Video) m;
+							linhasSaida.add(String.format(Locale.US, "4:%d,%s,%d,%s,%d,%.2f",
+									video.getCodigo(), video.getTitulo(), video.getAno(),
+									video.getCategoria().getNome(), video.getQualidade(), video.calculaLocacao()));
+						} else if (m instanceof Musica) {
+							Musica musica = (Musica) m;
+							linhasSaida.add(String.format(Locale.US, "4:%d,%s,%d,%s,%.2f,%.2f",
+									musica.getCodigo(), musica.getTitulo(), musica.getAno(),
+									musica.getCategoria().getNome(), musica.getDuracao(), musica.calculaLocacao()));
+						}
+					}
+				}
+			}
+
 			// Aqui continuaremos com as operações restantes
 
 		} catch (IOException e) {

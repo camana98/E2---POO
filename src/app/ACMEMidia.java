@@ -135,6 +135,29 @@ public class ACMEMidia {
 				linhasSaida.add(String.format(Locale.US, "6:%s,%.2f", musicaMaiorDuracao.getTitulo(), musicaMaiorDuracao.getDuracao()));
 			}
 
+			// Remover uma mídia - PASSO 7
+			if ((linha = br.readLine()) != null) {
+				int codigo = Integer.parseInt(linha);
+				Midia midia = midiateca.consultaPorCodigo(codigo);
+				if (midia == null) {
+					linhasSaida.add("7:Codigo inexistente");
+				} else {
+					if (midiateca.removeMidia(codigo)) {
+						if (midia instanceof Video) {
+							Video video = (Video) midia;
+							linhasSaida.add(String.format(Locale.US, "7:%d,%s,%d,%s,%d,%.2f",
+									video.getCodigo(), video.getTitulo(), video.getAno(),
+									video.getCategoria().getNome(), video.getQualidade(), video.calculaLocacao()));
+						} else if (midia instanceof Musica) {
+							Musica musica = (Musica) midia;
+							linhasSaida.add(String.format(Locale.US, "7:%d,%s,%d,%s,%.2f,%.2f",
+									musica.getCodigo(), musica.getTitulo(), musica.getAno(),
+									musica.getCategoria().getNome(), musica.getDuracao(), musica.calculaLocacao()));
+						}
+					}
+				}
+			}
+
 
 
 			// Aqui continuaremos com as operações restantes

@@ -1,55 +1,66 @@
 package dados;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Midiateca implements Iterador {
 
 	private int contador;
-
-	private Midia[] midia;
+	private List<Midia> midias;
+	private Map<Integer, Midia> midiasPorCodigo;
 
 	public Midiateca() {
-
+		this.midias = new ArrayList<>();
+		this.midiasPorCodigo = new HashMap<>();
+		this.reset();
 	}
 
 	public boolean cadastraMidia(Midia midia) {
-		return false;
+		if (midiasPorCodigo.containsKey(midia.getCodigo())) {
+			return false;
+		}
+		midias.add(midia);
+		midiasPorCodigo.put(midia.getCodigo(), midia);
+		return true;
 	}
 
 	public Midia consultaPorCodigo(int codigo) {
-		return null;
+		return midiasPorCodigo.get(codigo);
 	}
 
-	public ArrayList<Midia> consultaPorCategoria(Categoria categoria) {
-		return null;
+	public List<Midia> consultaPorCategoria(Categoria categoria) {
+		List<Midia> resultado = new ArrayList<>();
+		for (Midia midia : midias) {
+			if (midia.getCategoria() == categoria) {
+				resultado.add(midia);
+			}
+		}
+		return resultado;
 	}
 
 	public boolean removeMidia(int codigo) {
+		Midia midia = midiasPorCodigo.remove(codigo);
+		if (midia != null) {
+			midias.remove(midia);
+			return true;
+		}
 		return false;
 	}
 
-
-	/**
-	 * @see dados.Iterador#reset()
-	 */
+	@Override
 	public void reset() {
-
+		contador = 0;
 	}
 
-
-	/**
-	 * @see dados.Iterador#hasNext()
-	 */
+	@Override
 	public boolean hasNext() {
-		return false;
+		return contador < midias.size();
 	}
 
-
-	/**
-	 * @see dados.Iterador#next()
-	 */
+	@Override
 	public Object next() {
-		return null;
+		return midias.get(contador++);
 	}
-
 }

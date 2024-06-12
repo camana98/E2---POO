@@ -43,7 +43,7 @@ public class ACMEMidia {
 						categoria = Categoria.valueOf(categoriaStr);
 					} catch (IllegalArgumentException e) {
 						linhasSaida.add(String.format("1:Erro-categoria inválida: %s", categoriaStr));
-						br.readLine(); // Ignore the next line (quality) since category is invalid
+						br.readLine();
 						continue;
 					}
 					int qualidade = Integer.parseInt(br.readLine());
@@ -72,7 +72,7 @@ public class ACMEMidia {
 						categoria = Categoria.valueOf(categoriaStr);
 					} catch (IllegalArgumentException e) {
 						linhasSaida.add(String.format("2:Erro-categoria inválida: %s", categoriaStr));
-						br.readLine(); // Ignore the next line (duration) since category is invalid
+						br.readLine();
 						continue;
 					}
 					double duracao = Double.parseDouble(br.readLine());

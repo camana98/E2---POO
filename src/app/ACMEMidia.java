@@ -251,6 +251,26 @@ public class ACMEMidia {
 				}
 			}
 
+			// Mostrar os dados da mídia mais nova - PASSO 10
+			Midia midiaMaisNova = null;
+			int anoMaisNovo = Integer.MIN_VALUE;
+
+			for (Midia midia : midiateca.getMidias()) {
+				if (midia.getAno() > anoMaisNovo) {
+					anoMaisNovo = midia.getAno();
+					midiaMaisNova = midia;
+				}
+			}
+
+			if (midiaMaisNova == null) {
+				linhasSaida.add("10:Nenhuma midia encontrada.");
+			} else {
+				linhasSaida.add(String.format(Locale.US, "10:%d,%s,%d",
+						midiaMaisNova.getCodigo(),
+						midiaMaisNova.getTitulo(),
+						midiaMaisNova.getAno()));
+			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

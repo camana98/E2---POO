@@ -210,6 +210,47 @@ public class ACMEMidia {
 				linhasSaida.add(String.format(Locale.US, "8:%.2f", somatorio));
 			}
 
+			// Mostrar os dados da música com valor de locação mais próximo da média - PASSO 9
+			double somaValores = 0;
+			int quantidadeMusicas = 0;
+			List<Musica> musicas = new ArrayList<>();
+
+			for (Midia midia : midiateca.getMidias()) {
+				if (midia instanceof Musica) {
+					Musica musica = (Musica) midia;
+					somaValores += musica.calculaLocacao();
+					quantidadeMusicas++;
+					musicas.add(musica);
+				}
+			}
+
+			if (quantidadeMusicas == 0) {
+				linhasSaida.add("9:Nenhuma musica encontrada.");
+			} else {
+				double media = somaValores / quantidadeMusicas;
+				Musica musicaMaisProxima = null;
+				double menorDiferenca = Double.MAX_VALUE;
+
+				for (Musica musica : musicas) {
+					double diferenca = Math.abs(musica.calculaLocacao() - media);
+					if (diferenca < menorDiferenca) {
+						menorDiferenca = diferenca;
+						musicaMaisProxima = musica;
+					}
+				}
+
+				if (musicaMaisProxima != null) {
+					linhasSaida.add(String.format(Locale.US, "9:%.2f,%d,%s,%d,%s,%.1f,%.2f",
+							media,
+							musicaMaisProxima.getCodigo(),
+							musicaMaisProxima.getTitulo(),
+							musicaMaisProxima.getAno(),
+							musicaMaisProxima.getCategoria().getNome(),
+							musicaMaisProxima.getDuracao(),
+							musicaMaisProxima.calculaLocacao()));
+				}
+			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

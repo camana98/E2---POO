@@ -96,4 +96,8 @@ public class Midiateca implements Iterador {
 	public Object next() {
 		return midias.get(contador++);
 	}
+
+    public Midia[] getMidias() {
+		return midias.toArray(new Midia[midias.size()]);
+    }
 }

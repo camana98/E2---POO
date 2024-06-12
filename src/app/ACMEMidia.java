@@ -80,7 +80,7 @@ public class ACMEMidia {
 					Musica musica = new Musica(codigo, titulo, ano, categoria, duracao);
 
 					if (midiateca.cadastraMidia(musica)) {
-						linhasSaida.add(String.format(Locale.US, "2:%d,%s,%d,%s,%.1f", codigo, titulo, ano, categoria.getNome(), duracao));
+						linhasSaida.add(String.format(Locale.US, "2:%d,%s,%d,%s,%.2f", codigo, titulo, ano, categoria.getNome(), duracao));
 					} else {
 						linhasSaida.add(String.format("2:Erro-musica com codigo repetido: %d", codigo));
 					}
@@ -104,7 +104,7 @@ public class ACMEMidia {
 									video.getCategoria().getNome(), video.getQualidade(), video.calculaLocacao()));
 						} else if (midia instanceof Musica) {
 							Musica musica = (Musica) midia;
-							linhasSaida.add(String.format(Locale.US, "3:%d,%s,%d,%s,%.1f,%.2f",
+							linhasSaida.add(String.format(Locale.US, "3:%d,%s,%d,%s,%.2f,%.2f",
 									musica.getCodigo(), musica.getTitulo(), musica.getAno(),
 									musica.getCategoria().getNome(), musica.getDuracao(), musica.calculaLocacao()));
 						}
@@ -136,7 +136,7 @@ public class ACMEMidia {
 										video.getCategoria().getNome(), video.getQualidade(), video.calculaLocacao()));
 							} else if (m instanceof Musica) {
 								Musica musica = (Musica) m;
-								linhasSaida.add(String.format(Locale.US, "4:%d,%s,%d,%s,%.1f,%.2f",
+								linhasSaida.add(String.format(Locale.US, "4:%d,%s,%d,%s,%.2f,%.2f",
 										musica.getCodigo(), musica.getTitulo(), musica.getAno(),
 										musica.getCategoria().getNome(), musica.getDuracao(), musica.calculaLocacao()));
 							}
@@ -191,7 +191,7 @@ public class ACMEMidia {
 										video.getCategoria().getNome(), video.getQualidade(), video.calculaLocacao()));
 							} else if (midia instanceof Musica) {
 								Musica musica = (Musica) midia;
-								linhasSaida.add(String.format(Locale.US, "7:%d,%s,%d,%s,%.1f,%.2f",
+								linhasSaida.add(String.format(Locale.US, "7:%d,%s,%d,%s,%.2f,%.2f",
 										musica.getCodigo(), musica.getTitulo(), musica.getAno(),
 										musica.getCategoria().getNome(), musica.getDuracao(), musica.calculaLocacao()));
 							}
@@ -240,7 +240,7 @@ public class ACMEMidia {
 				}
 
 				if (musicaMaisProxima != null) {
-					linhasSaida.add(String.format(Locale.US, "9:%.2f,%d,%s,%d,%s,%.1f,%.2f",
+					linhasSaida.add(String.format(Locale.US, "9:%.2f,%d,%s,%d,%s,%.2f,%.2f",
 							media,
 							musicaMaisProxima.getCodigo(),
 							musicaMaisProxima.getTitulo(),
